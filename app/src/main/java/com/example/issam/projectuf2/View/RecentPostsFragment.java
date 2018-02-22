@@ -7,6 +7,7 @@ import com.google.firebase.database.Query;
  */
 
 public class RecentPostsFragment extends PostListFragment {
+    //Issam
     Query setQuery(){
         return mReference.child("posts/all-posts");
     }
