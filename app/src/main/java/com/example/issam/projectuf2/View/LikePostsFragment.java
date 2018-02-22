@@ -7,7 +7,7 @@ import com.google.firebase.database.Query;
  * Created by issam on 13/02/2018.
  */
 
-public class LikePostsFragment extends PostListFragment {
+public class LikPostsFragment extends PostListFragment {
 
     Query setQuery(){
         return mReference.child("posts/user-likes").child(FirebaseAuth.getInstance().getUid());
