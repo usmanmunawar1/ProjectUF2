@@ -20,7 +20,14 @@
             android:name=".View.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".View.NewPostActivity" android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".View.NewPostActivity"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".View.MediaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_media"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>

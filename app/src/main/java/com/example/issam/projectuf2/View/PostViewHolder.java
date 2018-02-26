@@ -17,6 +17,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
     TextView author;
     ImageView aurthorPhoto;
     TextView content;
+    ImageView image;
     ImageView like;
     TextView likeCount;
     LinearLayout likeLayout;
@@ -28,6 +29,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder{
         like = itemView.findViewById(R.id.like);
         likeCount = itemView.findViewById(R.id.num_likes);
         likeLayout = itemView.findViewById(R.id.like_layout);
+        image = itemView.findViewById(R.id.image);
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.issam.projectuf2.View;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -57,7 +58,28 @@ public abstract class PostListFragment extends Fragment {
                         .into(holder.aurthorPhoto);
 
                 holder.content.setText(post.content);
+                holder.image.setVisibility(View.VISIBLE);
+                if(post.mediaUrl != null) {
+                    if("audio".equals(post.mediaType)){
+                        holder.image.setImageResource(R.drawable.audio);
+                    } else {
+                        Glide.with(PostListFragment.this)
+                                .load(post.mediaUrl)
+                                .into(holder.image);
+                    }
+                    holder.image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getActivity(), MediaActivity.class);
+                            intent.putExtra("MEDIA_URL", post.mediaUrl);
+                            intent.putExtra("MEDIA_TYPE", post.mediaType);
+                            startActivity(intent);
+                        }
+                    });
 
+                } else {
+                    holder.image.setVisibility(View.GONE);
+                }
                 if(post.likes != null && post.likes.containsKey(FirebaseAuth.getInstance().getUid())){
                     holder.like.setImageResource(R.drawable.heart_on);
                 } else{

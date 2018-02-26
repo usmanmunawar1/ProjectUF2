@@ -52,12 +52,16 @@ public class NewPostActivity extends AppCompatActivity{
          btnPublish = findViewById(R.id.publish);
 
         btnPublish.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                btnPublish.setEnabled(false);
                 if(mediUri != null){
                     uploadFileAndWriteNewPost();
+                }else {
+                    writeNewPost();
                 }
-                writeNewPost();
+                finish();
             }
         });
 
@@ -90,8 +94,14 @@ public class NewPostActivity extends AppCompatActivity{
         String postKey = databaseReference.child("posts").push().getKey();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        assert firebaseUser != null;
-        databaseReference.child("posts/data").child(postKey).setValue(new Post(firebaseUser.getUid(), content.getText().toString(),firebaseUser.getDisplayName(),firebaseUser.getPhotoUrl().toString()));
+        Post post;
+
+        if(mediUri == null){
+            post = new Post(firebaseUser.getUid(), content.getText().toString(),firebaseUser.getDisplayName(),firebaseUser.getPhotoUrl().toString());
+        }else {
+           post = new Post(firebaseUser.getUid(), content.getText().toString(),firebaseUser.getDisplayName(),firebaseUser.getPhotoUrl().toString(), downloadUrl.toString(), mediaType);
+        }
+        databaseReference.child("posts/data").child(postKey).setValue(post);
         databaseReference.child("posts/all-posts").child(postKey).setValue(true);
         databaseReference.child("posts/user-posts").child(FirebaseAuth.getInstance().getUid()).child(postKey).setValue(true);
     }
